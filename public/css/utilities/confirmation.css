@@ -75,26 +75,30 @@ article.confirmation-page {
 
         .section-title {
             font-size: var(--font-size-xl);
-            line-height: var(--line-height-md);
-            color: var(--clr-text-primary);
+            margin: 0;
+            padding: 0 var(--space-md);
             margin: 0 0 var(--space-lg) 0;
             padding-bottom: var(--space-sm);
             border-bottom: 2px solid var(--clr-border);
         }
-
+                margin-bottom: var(--space-lg);
+                padding: var(--space-xl) var(--space-lg);
         .booking-details {
             .details-grid {
                 display: grid;
-                grid-template-columns: 1fr;
+                gap: var(--space-lg);
                 gap: var(--space-md);
 
                 .detail-card {
-                    display: flex;
+                        grid-template-columns: repeat(2, minmax(0, 1fr));
+                        gap: var(--space-md);
                     align-items: center;
                     gap: var(--space-md);
                     padding: var(--space-lg);
                     background-color: var(--clr-surface);
                     border: 1px solid var(--clr-border);
+                        padding: var(--space-md);
+                        gap: var(--space-sm);
                     border-radius: var(--radius-md);
                     box-shadow: var(--shadow-sm);
 
@@ -104,26 +108,27 @@ article.confirmation-page {
                     }
 
                     .detail-content {
-                        display: flex;
+                        gap: var(--space-md);
                         flex-direction: column;
                         gap: var(--space-xs);
 
                         .detail-label {
+                            border: 1px solid var(--clr-border);
                             font-size: var(--font-size-xs);
                             color: var(--clr-text-muted);
-                            text-transform: uppercase;
+                                padding: var(--space-sm) var(--space-md);
                             letter-spacing: 0.05em;
                             font-weight: 500;
                         }
-
-                        .detail-value {
-                            font-size: var(--font-size-lg);
-                            font-weight: 600;
+                                padding: var(--space-md);
+                                display: flex;
+                                flex-direction: column;
+                                gap: var(--space-sm);
                             color: var(--clr-text-primary);
                             text-transform: capitalize;
                         }
                     }
-                }
+                                    gap: var(--space-2xs);
             }
         }
 
@@ -394,6 +399,91 @@ article.confirmation-page {
     }
 }
 
+@media print {
+    body {
+        margin: 0;
+        background: #fff;
+        color: #000;
+    }
+
+    header.content-grid,
+    nav,
+    footer.content-grid,
+    #mobile-menu-toggle,
+    label[for="mobile-menu-toggle"],
+    .confirmation-actions,
+    .confirmation-actions .btn {
+        display: none !important;
+    }
+
+    main.content-grid {
+        padding: 0;
+    }
+
+    article.confirmation-page {
+        max-width: 100%;
+        margin: 0;
+        padding: 0 var(--space-lg) var(--space-xl);
+        background: #fff;
+    }
+
+    article.confirmation-page * {
+        box-shadow: none !important;
+    }
+
+    article.confirmation-page .confirmation-header {
+        background: transparent;
+        border: none;
+        padding: var(--space-xl) var(--space-lg);
+        margin-bottom: var(--space-lg);
+    }
+
+    article.confirmation-page .confirmation-header .success-icon {
+        animation: none;
+    }
+
+    article.confirmation-page .confirmation-header .success-icon svg {
+        filter: none;
+    }
+
+    article.confirmation-page .confirmation-content {
+        gap: var(--space-xl);
+    }
+
+    article.confirmation-page .section-title {
+        margin-bottom: var(--space-md);
+        padding-bottom: var(--space-xs);
+        border-bottom-color: #d0d0d0;
+    }
+
+    article.confirmation-page .booking-details,
+    article.confirmation-page .passengers-info,
+    article.confirmation-page .important-info,
+    article.confirmation-page .booking-reference,
+    article.confirmation-page .passenger-info-card,
+    article.confirmation-page .detail-card,
+    article.confirmation-page .section-title {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    article.confirmation-page .detail-card,
+    article.confirmation-page .passenger-info-card,
+    article.confirmation-page .important-info {
+        background: #fff;
+        border-color: #d0d0d0;
+    }
+
+    article.confirmation-page .booking-details .details-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-md);
+    }
+
+    article.confirmation-page .next-steps {
+        display: none !important;
+    }
+}
+
 @keyframes scaleIn {
     from {
         transform: scale(0);
@@ -402,18 +492,5 @@ article.confirmation-page {
     to {
         transform: scale(1);
         opacity: 1;
-    }
-}
-
-@media print {
-    article.confirmation-page {
-        .confirmation-actions {
-            display: none;
-        }
-
-        .confirmation-header {
-            background-color: white;
-            border: 2px solid var(--clr-primary);
-        }
     }
 }
